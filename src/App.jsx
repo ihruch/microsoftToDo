@@ -11,15 +11,15 @@ import './App.scss';
 
 export default function App() {
     const  [lists, setLists] = useState([]);
-    const  [todos, setTodos] = useState([]);
+   // const  [todos, setTodos] = useState([]);
 
     useEffect( () => {
-        getCollectionData('lists').then(setLists);
-        getCollectionData('todos').then(setTodos);
+        getCollectionData('lists')().then(setLists);
+       // getCollectionData('todos').then(setTodos);
     }, []);
 
     return (
-        <DBContext.Provider value={{lists, todos}} >
+        <DBContext.Provider value={{lists}} >
             <div className="app">
                 <AppDrawer lists={lists} />
                 <AppContent>
@@ -27,9 +27,7 @@ export default function App() {
                         <Route path="/:listId" component={TodoList}/>
                     </Switch>
 
-                    <ul>
-                        { todos.map( todo =>  <li key={todo.id}>{todo.title}</li>) }
-                    </ul>
+
                 </AppContent>
 
             </div>
